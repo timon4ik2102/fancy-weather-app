@@ -1,0 +1,32 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": "eslint-config-airbnb-base",
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+
+	"rules": {
+		"indent": "off",
+		"comma-spacing": "off",
+		"linebreak-style": "off",
+		"semi": "off",
+		"no-param-reassign": "off",
+		"object-curly-newline": ["error", {
+			"multiline": true
+		}],
+		"max-len": [
+			"error",
+			{
+				"code": 230
+			}
+		],
+
+		"comma-dangle": "off",
+		"no-console": "off"
+	}
+
+}

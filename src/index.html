@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="ru">
+    <title>Fancy weather</title>
+    <link rel="shortcut icon" href="./assets/images/icons/weather-fav.ico" type="image/x-icon">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper wrapper-bg">
+        <header class="controls-block">
+            <div class="wrapper-element wrapper-btns">
+                <div class="btn-base controls-block__btn-bg">
+                    <img src="./assets/images/icons/refresh_icon.svg" class="controls-block__btn-bg_icon" alt="refresh">
+                </div>
+                <div class="wrapper-droplist">
+                    <select class="droplist-base">
+                        <option class="droplist-option">en</option>
+                        <option class="droplist-option">ru</option>
+                        <option class="droplist-option">be</option>
+                        <!-- <option class="droplist-option">ua</option> -->
+                    </select>
+                </div>
+                <div class="wrapper-element wrapper-temperature">
+                    <div id="farenheitBtn"
+                        class="btn-base controls-block__btn-temp controls-block__btn-temp_farenheit "> °F</div>
+                    <div id="celciumBtn" class="btn-base controls-block__btn-temp controls-block__btn-temp_celcium ">°C
+                    </div>
+                </div>
+                <div class="btn-base btn-speaker">
+                </div>
+                <div class="btn-base btn-ask">
+                </div>
+            </div>
+            <div class="wrapper-element wrapper-search">
+                <form class="wrapper-search__form">
+                    <input class="input-elem" type="search" placeholder="Search city">
+                    <span data-name="Clear" class="search-clear tooltip"></span>
+                    <span data-name="Microphone Your language browser" class="microphone  tooltip"></span>
+                    <button id="searchBtn" class="btn-base controls-block__btn-search">SEARCH</button>
+                    <div class="error-element"></div>
+                </form>
+            </div>
+        </header>
+        <main class="main">
+            <div class="weather-container">
+                <div class="weather-today">
+                    <h1 class="weather-today__city-name" id="city"></h1>
+                    <div class="weather-today__date" id="currentDate"></div>
+                    <div class="weather-today__summary">
+                        <div class="weather-today__temperature temp-block" id="today-temperature">1</div>
+                        <div class="weather-today__right-block">
+                            <img class="weather-today__icon weather-icons" src='#' alt='icon'></img>
+                            <div class="weather-today__description weather-today__details"></div>
+                            <div id="windSpeed" class="weather-today__wind weather-today__details"></div>
+                            <div class="weather-today__temp-apparent weather-today__details temp-block"> </div>
+                            <div id="humidity" class="weather-today__humidity weather-today__details"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" weather-future">
+                    <div class="weather-future__day-one day-one">
+                        <div class="day-one__name weather-future__dayname">Tuesday</div>
+                        <div class="day-one__temperature weather-future__temperature temp-block"></div>
+                        <img class='weather-future__icon weather-icons' id="futureDayOneIcon" src='#' alt='icon'></img>
+                    </div>
+                    <div class="weather-future__day-two ">
+                        <div class="day-two__name weather-future__dayname">Monday</div>
+                        <div class="day-two__temperature weather-future__temperature temp-block"></div>
+                        <img class='weather-future__icon weather-icons' id="futureDayTwoIcon" src='#' alt='icon'></img>
+                    </div>
+                    <div class="weather-future__day-three">
+                        <div class="day-three__name weather-future__dayname">Sunday</div>
+                        <div class="day-three__temperature weather-future__temperature temp-block"></div>
+                        <img class='weather-future__icon weather-icons' id="futureDayThreeIcon" src='#'
+                            alt='icon'></img>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <div class="map" id="map"></div>
+                <div class="coordinates">
+                    <div data-i18n='header' class="coordinates__latitude"><span
+                            class="coordinates__latitude_text"></span><span class="coordinates__latitude_value"></span>
+                    </div>
+                    <div class=" coordinates__longitude" data-i18n='test'><span></span><span
+                            class="coordinates__longitude_value"></span></div>
+                </div>
+            </div>
+            <div class="spinner-wrapper">
+                <div class="spinner">
+                    <div class="cssload-loader">
+                        <div class="cssload-inner cssload-one"></div>
+                        <div class="cssload-inner cssload-two"></div>
+                        <div class="cssload-inner cssload-three"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

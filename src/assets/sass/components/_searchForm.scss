@@ -1,0 +1,202 @@
+.wrapper-search {
+    width: 39%;
+    position: relative;
+
+    &__form {
+        display: flex;
+        width: 100%;
+
+        @include media-mobile {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    @include media-desktop-small {
+        width: 51%;
+    }
+
+    @include media-tablet {
+        width: 100%;
+    }
+
+    @include media-mobile {
+        width: 100%;
+        min-height: 102px;
+    }
+}
+
+.input-elem {
+    background-image: url('../images/icons/search.svg');
+    width: calc(100% - 101px);
+    height: 44px;
+    padding: 0 0 0 15px;
+    color: $color-white;
+    background-color: $color-input;
+    border: 1px solid $color-white;
+    border-right-width: 0;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: 10px;
+    padding-left: 45px;
+    font-size: 1.6rem;
+
+    @include media-mobile {
+        width: auto;
+        border-right-width: 1px;
+        border-radius: 5px;
+        background-size: 15px;
+    }
+}
+
+.btn-microphon {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    line-height: 50px;
+    text-align: center;
+    background: $color-input;
+    border-color: $color-white;
+    border-style: solid;
+    border-width: 1px 0;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    user-select: none;
+}
+
+.input-elem::placeholder {
+    color: $color-white;
+    text-indent: 0;
+    transition: text-indent 0.3s ease;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+.controls-block__btn-search {
+    width: 101px;
+    font-weight: 700;
+    background: $color-grey;
+    border: 1px solid $color-white;
+    border-left-width: 0;
+    border-radius: 0 5px 5px 0;
+    outline: none;
+
+    @include media-mobile {
+        border-left-width: 1px;
+        margin-top: 5px;
+        border-radius: 5px;
+        width: 100%;
+    }
+}
+
+.controls-block__btn-search:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(0deg, rgba(246, 255, 126, 0.096), rgba(255, 235, 235, 0.74));
+    transform: skewX(45deg);
+}
+
+.controls-block__btn-search:hover:before {
+    left: 150px;
+    transition: 0.4s ease-in-out;
+}
+
+.controls-block__btn-search:hover {
+    background-color: $color-blue;
+}
+
+.microphone,
+.search-clear {
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: 0.2s;
+    align-self: center;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.microphone {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-image: url('../images/icons/tool.svg');
+    background-size: 22px;
+    right: 125px;
+
+    @include media-tablet {
+        width: 24px;
+        background-size: 15px;
+        right: 125px;
+    }
+
+    @include media-mobile {
+        margin-top: 8px;
+        background-size: 20px;
+        right: 15px;
+    }
+}
+
+.search-clear {
+    width: 27px;
+    height: 27px;
+    background-image: url('../images/icons/clear.svg');
+    background-size: 20px;
+    right: 156px;
+
+    @include media-tablet {
+        margin-top: 1px;
+        width: 24px;
+        background-size: 13px;
+        right: 143px;
+    }
+
+    @include media-mobile {
+        margin-top: 8px;
+        background-size: 17px;
+        right: 40px;
+    }
+}
+
+.microphone-active {
+    filter: invert(6%) sepia(88%) saturate(6727%) hue-rotate(60deg);
+}
+
+.error-element {
+    position: absolute;
+    bottom: 9px;
+    font-size: 1.6rem;
+    color: $color-white;
+
+    @include media-desktop-small {
+        font-size: 1.4rem;
+    }
+
+    @include media-tablet {
+        bottom: 5px;
+        font-size: 1.2rem;
+    }
+
+    @include media-mobile {
+        position: relative;
+        margin-top: 8px;
+        background-size: 17px;
+        right: 0;
+    }
+}

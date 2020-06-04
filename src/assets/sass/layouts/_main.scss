@@ -1,0 +1,23 @@
+// .container {
+//     margin: 0 auto;
+//     max-width: 1320px;
+
+//     @include media-desktop-small {
+//         max-width: 950px;
+//     }
+
+//     @include media-tablet {
+//         max-width: 640px;
+//     }
+// }
+
+.main {
+    position: relative;
+    display: flex;
+    flex: 1 1 100%;
+    margin: 5px;
+
+    @include media-mobile {
+        flex-direction: column;
+    }
+}

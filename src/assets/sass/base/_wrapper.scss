@@ -1,0 +1,41 @@
+.wrapper {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    min-width: 320px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1% 2%;
+}
+
+.wrapper-element {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    margin: 5px;
+    padding: 30px 20px;
+    border-radius: 5px;
+    background-color: $color-bg;
+    box-shadow: 1px 1px 5px $color-black;
+
+    @include media-tablet {
+        padding: 20px;
+    }
+
+    @include media-mobile {
+        padding: 10px;
+    }
+}

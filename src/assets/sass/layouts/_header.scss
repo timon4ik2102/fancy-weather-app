@@ -1,0 +1,59 @@
+.btn-base {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 44px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #fff;
+    background: rgba(76, 82, 85, .4);
+    cursor: pointer;
+    -webkit-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn-base:before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(0deg, rgba(246, 255, 126, 0.096), rgba(255, 235, 235, 0.74));
+    transform: skewX(45deg);
+}
+
+.btn-base:hover:before {
+    left: 150px;
+    transition: .5s ease-in-out
+}
+
+.controls-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+
+    &__btn-bg {
+        line-height: 54px;
+        background-color: grey;
+        background-image: url('../images/img/controlsbtn.png');
+        border: 1px solid #fff;
+        border-radius: 5px;
+
+
+    }
+}

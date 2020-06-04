@@ -1,0 +1,171 @@
+// Селектор
+
+.wrapper-btns {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1 20%;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+
+    @include media-tablet {
+        justify-content: space-between;
+    }
+
+    @include media-mobile {
+        justify-content: space-between;
+    }
+}
+
+.controls-block__btn-bg:hover,
+.controls-block__btn-bg_active,
+.btn-speaker:hover {
+    background-color: $color-blue;
+}
+
+.wrapper-droplist {
+    position: relative;
+    margin: 0 20px;
+    overflow: hidden;
+    transition: 0.2s ease-in-out;
+    @include media-tablet {
+        margin: 0 10px;
+    }
+}
+
+.wrapper-droplist:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(0deg, $color-gradient-one, $color-gradient-two);
+    transform: skewX(45deg);
+}
+
+.droplist-base {
+    display: block;
+    width: 50px;
+    height: 44px;
+    padding: 0 0 0 10px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: $color-white;
+    text-transform: uppercase;
+    background: $color-grey;
+    border: 1px solid $color-white;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.wrapper-droplist:hover:before {
+    left: 150px;
+    transition: 0.5s ease-in-out;
+}
+
+.droplist-base:hover {
+    background-color: $color-blue;
+}
+
+.wrapper-temperature {
+    position: relative;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    // height: 60px;
+    border: 1px solid $color-white;
+    -webkit-perspective: 90px;
+    perspective: 90px;
+}
+
+.droplist-option {
+    background-color: $color-grey;
+    &:hover {
+        background-color: none;
+    }
+}
+
+.droplist-option:focus {
+    outline: 0 !important;
+}
+.controls-block {
+    &__btn-temp_farenheit {
+        z-index: 1;
+        border-radius: 5px 0 0 5px;
+        box-sizing: border-box;
+        background-color: $color-grey;
+        color: $color-white-alpha;
+    }
+    &__btn-temp_celcium {
+        z-index: 1;
+        border-radius: 0 5px 5px 0;
+        box-sizing: border-box;
+        background-color: $color-grey;
+        color: $color-white-alpha;
+    }
+}
+
+.btn-speaker {
+    line-height: 54px;
+    background-color: grey;
+    background-image: url('../images/icons/speaker.svg');
+    background-position: center;
+    border: 1px solid $color-white;
+    border-radius: 5px;
+    margin-left: 20px;
+    background-size: 27px;
+    background-repeat: no-repeat;
+
+    @include media-tablet {
+        margin-left: 10px;
+    }
+}
+
+.btn-active {
+    background-color: $color-btn-bg;
+}
+
+.btn-ask {
+    line-height: 54px;
+    background-color: grey;
+    background-image: url('../images/icons/question.svg');
+    background-position: center;
+    border: 1px solid $color-white;
+    border-radius: 5px;
+    margin-left: 20px;
+    background-size: 27px;
+    background-repeat: no-repeat;
+
+    @include media-tablet {
+        margin-left: 10px;
+    }
+
+    @include media-mobile {
+        display: none;
+    }
+}
+
+.btn-speaker:before,
+.btn-ask:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(0deg, $color-gradient-one, $color-gradient-two);
+    transform: skewX(45deg);
+}
+
+.controls-block__btn-temp:hover {
+    color: $color-white;
+}
+
+.temp-active {
+    color: $color-white;
+    background-color: $color-btn-bg;
+    border-radius: inherit;
+}
