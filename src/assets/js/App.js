@@ -5,8 +5,8 @@ import { changeBackground } from './BackgroundImage';
 
 if (!localStorage.language) localStorage.language = 'en';
 if (!localStorage.indexSelected) localStorage.indexSelected = 0;
-if (!localStorage.units) localStorage.units = 'si';
-if (localStorage.getItem('units') === 'si') {
+if (!localStorage.units) localStorage.units = 'metric';
+if (localStorage.getItem('units') === 'metric') {
     celsiumButton.classList.add('temp-active');
 } else {
     farenheitButton.classList.add('temp-active');
@@ -48,7 +48,7 @@ const buttonsFuctionality = () => {
     askBtn.addEventListener('click', () => {
         // eslint-disable-next-line no-alert
         alert(
-            'Погода по словам в зависимости от языка: прогноз по словам "weather" или "погода"; звук тише - "quieter", "потише", "цішэй"; громче - "louder", "громче", "гучней". Доп.функционал: лоадер, Мой телеграм @romatotti2102'
+            'Погода по словам в зависимости от языка: прогноз по словам "weather" или "погода"; звук тише - "quieter", "потише", "тихіше"; громче - "louder", "громче", "голосніше". Доп.функционал: лоадер, Мой телеграм @romatotti2102'
         );
     });
 

@@ -1,8 +1,6 @@
 import { searchBtn, microphoneBtn, inputEl, speakerBtn } from './Constants';
 import { listenMessage, getWeather } from './GeneratePageData';
 import { translationData } from './TranslateData';
-// eslint-disable-next-line import/no-cycle
-// import { getWeather } from './GeneratePageData';
 
 // eslint-disable-next-line import/prefer-default-export
 const msg = new SpeechSynthesisUtterance();
@@ -11,9 +9,7 @@ function listenTotheWeather() {
     const curLang = localStorage.getItem('language');
     msg.rate = 1;
     msg.pitch = 1;
-    msg.text = `${translationData.translateDSky.sound[curLang]} ${listenMessage} ${translationData.translateDSky.degree[curLang]}. ${
-        translationData.weatherCode[getWeather.descr][curLang]
-    }. ${translationData.translateDSky.wind[curLang]} ${getWeather.windSpeed} ${translationData.translateDSky.msTwo[curLang]}. ${translationData.translateDSky.humidity[curLang]} ${
+    msg.text = `${translationData.translateDSky.sound[curLang]} ${listenMessage} ${translationData.translateDSky.degree[curLang]}.  ${translationData.translateDSky.wind[curLang]} ${getWeather.windSpeed} ${translationData.translateDSky.msTwo[curLang]}. ${translationData.translateDSky.humidity[curLang]} ${
         getWeather.humidity
     }%`;
     speechSynthesis.speak(msg);
@@ -50,12 +46,12 @@ function speakVoice() {
                 break;
             case 'quieter':
             case 'потише':
-            case 'цішэй':
+            case 'тихіше':
                 msg.volume -= 0.2;
                 break;
             case 'louder':
             case 'громче':
-            case 'гучней':
+            case 'голосніше':
                 msg.volume += 0.2;
                 break;
 
@@ -75,9 +71,9 @@ function speakVoice() {
         } else if (localStorage.getItem('language') === 'ru') {
             recognition.lang = 'ru-RU';
             msg.lang = 'ru-RU';
-        } else if (localStorage.getItem('language') === 'be') {
-            recognition.lang = 'be-BE';
-            msg.lang = 'ru-RU';
+        } else if (localStorage.getItem('language') === 'ua') {
+            recognition.lang = 'uk-UA';
+            msg.lang = 'uk-UA';
         }
     }
 

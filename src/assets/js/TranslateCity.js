@@ -17,7 +17,7 @@ import { locationCity, cityHeaderBlock } from './Constants';
 // export default translateCityName;
 
 async function getUserLocationName(searchItem, currLang) {
-    const API_SEARCHCITY_KEY = '751b1bc404274e52888f309831010ade';
+    const API_SEARCHCITY_KEY = 'bbc5fdee02e141f393493b46af55cd37';
     // const lang = localStorage.getItem('language');
     const opendataUrl = `https://api.opencagedata.com/geocode/v1/json?q=${searchItem}&key=${API_SEARCHCITY_KEY}&language=${currLang}&pretty=1&no_annotations=1`;
     const res = await fetch(opendataUrl);

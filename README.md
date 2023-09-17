@@ -1,5 +1,5 @@
 # fancy-weather-application
-link [https://romas-fancy-weather-app.netlify.app/]
+link [https://6506cfb35d971a21e8e273cb--willowy-dieffenbachia-2f55b4.netlify.app/]
 [GitHub](https://romas-fancy-weather-app.netlify.app/)
 
 TECHNICAL IMPLEMENTATION:

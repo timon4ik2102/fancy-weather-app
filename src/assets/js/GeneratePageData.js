@@ -35,6 +35,7 @@ function getDayMiddleTemperature(maxtemp, minTemp) {
 let listenMessage = '';
 
 const select = document.querySelector('.droplist-base');
+let wind;
 let intervalTime;
 if (localStorage.getItem('indexSelected')) {
     select.options[localStorage.getItem('indexSelected')].selected = true;
@@ -48,6 +49,7 @@ export function showTemperature(temperature, tempElem, number, language) {
 }
 
 function changeTemperature() {
+    const num = 0.44704
     farenheitButton.addEventListener('click', () => {
         if (!farenheitButton.classList.contains('temp-active')) {
             celsiumButton.classList.remove('temp-active');
@@ -58,8 +60,15 @@ function changeTemperature() {
                 showTemperature(tempValue, temperatureBlocks[item], item, localStorage.getItem('language'));
                 getWeather.farenheitTempArray.splice(item, 1, tempValue);
             });
+            if (wind) {
+                wind /= num;
+            } else {
+                wind = getWeather.windSpeed / num;
+            }
 
-            localStorage.setItem('units', 'us');
+            windSpeedBlock.innerHTML = `${translationData.translateDSky.wind[localStorage.getItem('language')]} ${wind.toFixed()} ${translationData.translateDSky.ms[localStorage.getItem('language')]}`;
+
+            localStorage.setItem('units', 'imperial');
         }
     });
     celsiumButton.addEventListener('click', () => {
@@ -72,19 +81,26 @@ function changeTemperature() {
                 showTemperature(tempValue, temperatureBlocks[item], item, localStorage.getItem('language'));
                 getWeather.farenheitTempArray.splice(item, 1, tempValue);
             });
-            localStorage.setItem('units', 'si');
+            if (wind) {
+                wind *= num;
+            } else {
+                wind = getWeather.windSpeed * num;
+            }
+            windSpeedBlock.innerHTML = `${translationData.translateDSky.wind[localStorage.getItem('language')]} ${wind.toFixed()} ${translationData.translateDSky.msTwo[localStorage.getItem('language')]}`;
+            localStorage.setItem('units', 'metric');
         }
     });
 }
 
 function showWeatherIcon(weatherCode, elem) {
+    console.log(weatherCode, elem)
     switch (weatherCode) {
         case 'freezing_rain_heavy':
         case 'freezing_rain':
         case 'freezing_rain_light':
             elem.src = './assets/images/icons/weather/sleet.svg';
             break;
-        case 'clear':
+        case 'Clear':
             elem.src = './assets/images/icons/weather/day.svg';
             break;
         case 'mostly_clear':
@@ -92,14 +108,21 @@ function showWeatherIcon(weatherCode, elem) {
             elem.src = './assets/images/icons/weather/cloudy-day.svg';
             break;
         case 'mostly_cloudy':
-        case 'cloudy':
+        case 'Clouds':
             elem.src = './assets/images/icons/weather/cloudy.svg';
             break;
-        case 'fog_light':
-        case 'fog':
+        case 'Mist':
+        case 'Smoke':
+        case 'Haze':
+        case 'Dust':
+        case 'Sand':
+        case 'Ash':
+        case 'Squall':
+        case 'Tornado':
+        case 'Fog':
             elem.src = './assets/images/icons/weather/mist.svg';
             break;
-        case 'drizzle':
+        case 'Drizzle':
             elem.src = './assets/images/icons/weather/drizzly.svg';
             break;
         case 'freezing_drizzle':
@@ -115,19 +138,19 @@ function showWeatherIcon(weatherCode, elem) {
         case 'flurries':
             elem.src = './assets/images/icons/weather/wind.svg';
             break;
-        case 'tstorm':
+        case 'Thunderstorm':
             elem.src = './assets/images/icons/weather/thunder.svg';
             break;
         case 'rain_light':
             elem.src = './assets/images/icons/weather/rainyli.svg';
             break;
-        case 'rain':
-            elem.src = './assets/images/icons/weather/rain.svg';
+        case 'Rain':
+            elem.src = './assets/images/icons/weather/rainh.svg';
             break;
         case 'rain_heavy':
             elem.src = './assets/images/icons/weather/rainh.svg';
             break;
-        case 'snow_heavy':
+        case 'Snow':
             elem.src = './assets/images/icons/weather/snow.svg';
             break;
         case 'snow':
@@ -141,6 +164,7 @@ function showWeatherIcon(weatherCode, elem) {
     }
 }
 
+
 export async function showInformationOnpage(language) {
     clearInterval(intervalTime);
     intervalTime = setInterval(() => calcTime(locationCity.offset, currentDateBlock, language), 1000);
@@ -151,16 +175,24 @@ export async function showInformationOnpage(language) {
     searchBtn.innerText = `${translationData.translate.search[language]}`;
     inputEl.placeholder = `${translationData.translate.placeholder[language]}`;
     nextDay(locationCity.offset, language);
-    getWeather.farenheitTempArray.forEach((tempValue, item) => {
-        showTemperature(tempValue, temperatureBlocks[item], item, language);
-    });
     getWeather.weatherIconsArray.forEach((icon, item) => {
         showWeatherIcon(icon, weatherIcons[item]);
     });
-    weatherDescriptionBlock.innerText = translationData.weatherCode[getWeather.descr][language];
+    if (localStorage.getItem('units') === 'metric') {
+        windSpeedBlock.innerHTML = `${translationData.translateDSky.wind[language]} ${getWeather.windSpeed} ${translationData.translateDSky.msTwo[language]}`;
+    } else {
+        windSpeedBlock.innerHTML = `${translationData.translateDSky.wind[language]} ${getWeather.windSpeed} ${translationData.translateDSky.ms[language]}`;
+    }
+    // weatherDescriptionBlock.innerText = translationData.weatherCode[getWeather.descr][language];
     listenMessage = Math.round(getWeather.farenheitTempArray[0]);
+    getWeather.farenheitTempArray.forEach((tempValue, item) => {
+        showTemperature(tempValue, temperatureBlocks[item], item, language);
+    });
+
+
     changeTemperature();
 }
+
 
 export function changeLanguage() {
     // eslint-disable-next-line func-names
@@ -176,20 +208,17 @@ export function changeLanguage() {
 }
 
 export function showForecast(resultsCurrent, resultsDaily) {
-    getWeather.humidity = resultsCurrent.humidity.value;
-    const windSpeed = resultsCurrent.wind_speed.value;
-    if (localStorage.getItem('units') !== 'si') {
-        getWeather.windSpeed = (windSpeed / milesToMeterDividerNum).toFixed();
-    } else {
-        getWeather.windSpeed = windSpeed.toFixed();
-    }
-    getWeather.descr = resultsCurrent.weather_code.value;
-    getWeather.weatherIconsArray = [getWeather.descr, resultsDaily[1].weather_code.value, resultsDaily[2].weather_code.value, resultsDaily[3].weather_code.value];
-    const farenheitTempCurrent = resultsCurrent.temp.value;
-    const feelingTemperature = resultsCurrent.feels_like.value;
-    const nextDayTemperature = getDayMiddleTemperature(resultsDaily[1].temp[1].max.value, resultsDaily[1].temp[0].min.value);
-    const nextDayTwoTemperature = getDayMiddleTemperature(resultsDaily[2].temp[1].max.value, resultsDaily[2].temp[0].min.value);
-    const nextDayThreeTemperature = getDayMiddleTemperature(resultsDaily[3].temp[1].max.value, resultsDaily[3].temp[0].min.value);
+    getWeather.humidity = resultsCurrent.current.humidity;
+    getWeather.windSpeed = resultsCurrent.current.wind_speed.toFixed();
+
+    // getWeather.descr = resultsCurrent.current.weather[0].description;
+    // getWeather.weatherIconsArray = [getWeather.descr];
+    getWeather.weatherIconsArray = [resultsCurrent.current.weather[0].main, resultsCurrent.daily[1].weather[0].main, resultsCurrent.daily[2].weather[0].main, resultsCurrent.daily[3].weather[0].main,];
+    const farenheitTempCurrent = resultsCurrent.current.temp;
+    const feelingTemperature = resultsCurrent.current.feels_like;
+    const nextDayTemperature = getDayMiddleTemperature(resultsCurrent.daily[1].temp.max, resultsCurrent.daily[1].temp.min);
+    const nextDayTwoTemperature = getDayMiddleTemperature(resultsCurrent.daily[2].temp.max, resultsCurrent.daily[2].temp.min);
+    const nextDayThreeTemperature = getDayMiddleTemperature(resultsCurrent.daily[3].temp.max, resultsCurrent.daily[3].temp.min);
     getWeather.farenheitTempArray = [farenheitTempCurrent, feelingTemperature, nextDayTemperature, nextDayTwoTemperature, nextDayThreeTemperature];
     return getWeather;
 }
